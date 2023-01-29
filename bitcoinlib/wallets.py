@@ -3884,12 +3884,12 @@ class Wallet(object):
                                                       number_of_change_outputs)
                 transaction.sign(priv_keys)
 
-        if transaction.error == "":
+        if not transaction.error:
             print(transaction.error)
             return None
 
         transaction.rawtx = transaction.raw()
-        if transaction.error == "":
+        if not transaction.error:
             print(transaction.error)
             return None
 
@@ -3899,7 +3899,7 @@ class Wallet(object):
         transaction.txid = transaction.signature_hash()[::-1].hex()
         transaction.send(offline)
 
-        if transaction.error == "":
+        if not transaction.error:
             print(transaction.error)
             return None
         return transaction

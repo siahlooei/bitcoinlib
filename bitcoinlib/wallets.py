@@ -3884,12 +3884,24 @@ class Wallet(object):
                                                       number_of_change_outputs)
                 transaction.sign(priv_keys)
 
+        if transaction.error is not None:
+            print(transaction.error)
+            return None
+
         transaction.rawtx = transaction.raw()
+        if transaction.error is not None:
+            print(transaction.error)
+            return None
+
         transaction.size = len(transaction.rawtx)
         transaction.calc_weight_units()
         transaction.fee_per_kb = int(float(transaction.fee) / float(transaction.vsize) * 1000)
         transaction.txid = transaction.signature_hash()[::-1].hex()
         transaction.send(offline)
+
+        if transaction.error is not None:
+            print(transaction.error)
+            return None
         return transaction
 
     def send_to(self, to_address, amount, input_key_id=None, account_id=None, network=None, fee=None, min_confirms=1,

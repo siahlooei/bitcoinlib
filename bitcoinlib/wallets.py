@@ -3676,9 +3676,9 @@ class Wallet(object):
                                   "or lower fees")
 
             if self.scheme == 'single':
-                change_keys = [self.get_key(account_id=account_id, network=network, change=1)]
+                change_keys = [self.get_key(account_id=account_id, network=network, change=0)]
             else:
-                change_keys = self.get_keys(account_id=account_id, network=network, change=1,
+                change_keys = self.get_keys(account_id=account_id, network=network, change=0,
                                             number_of_keys=number_of_change_outputs)
 
             if number_of_change_outputs > 1:
